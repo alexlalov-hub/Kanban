@@ -1,0 +1,183 @@
+﻿@using System.Security.Claims;
+@model IEnumerable<Kanban.Models.Task>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="content-wrapper kanban mt-xxl-5" style="height: 100%; background-color: white; margin-left: 0px">
+    <section class="content pb-3">
+        <div style="margin: auto; text-align: center; margin-bottom: 20px">
+            <input type="checkbox" checked onclick="todoChecker(event)"/>
+            <label style="margin-right: 20px">Show To Do column</label>
+
+            <input type="checkbox" checked onclick="inChecker(event)"/>
+            <label style="margin-right: 20px">Show In Progress column</label>
+
+            <input type="checkbox" checked onclick="testingChecker(event)" />
+            <label>Show Testing column</label>
+
+        </div>
+        <div class="container-fluid" style="min-height: 1000px">
+            <div class="card card-row card-primary" id="todo" style="min-width: 400px">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        To Do
+                    </h3>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a asp-controller="Task" asp-action="Create" style="margin-left: 300px"><i class="fa-solid fa-plus"></i></a>
+                    }
+                </div>
+                @foreach (var task in Model.Where(t => t.Status == Kanban.Models.Task.Statuses.Open))
+                {
+                    <div class="card-body" style="height: auto">
+                        <div class="card card-light card-outline">
+                            <div class="card-header">
+                                <h5 class="card-title"> <b>@task.Title</b> from @task.CreatedDate.Day/@task.CreatedDate.Month/@task.CreatedDate.Year until @task.ExpectedEndDate.Day/@task.ExpectedEndDate.Month/@task.ExpectedEndDate.Year</h5>
+                                <div class="card-tools">
+                                    @if (User.IsInRole("Developer"))
+                                    {
+                                        <form asp-controller="Task" asp-action="Start" asp-route-id="@task.Id" method="post">
+                                            <button type="submit" class="btn btn-tool">
+                                                <i class="fa-solid fa-user-check"></i>
+                                            </button>
+                                        </form>
+                                    }
+
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <p>
+                                    @task.Description
+                                </p>
+                                <p>
+                                    Creator: @task.Creator.UserName
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            </div>
+            <div class="card card-row card-default" style="min-width: 400px" id="inprogress">
+                <div class="card-header bg-info">
+                    <h3 class="card-title">
+                        In Progress
+                    </h3>
+                </div>
+                @foreach (var task in Model.Where(t => t.Status == Kanban.Models.Task.Statuses.InProgress))
+                {
+                    <div class="card-body" style="height: auto">
+                        <div class="card card-light card-outline">
+                            <div class="card-header">
+                                <h5 class="card-title"> <b>@task.Title</b> from @task.CreatedDate.Day/@task.CreatedDate.Month/@task.CreatedDate.Year until @task.ExpectedEndDate.Day/@task.ExpectedEndDate.Month/@task.ExpectedEndDate.Year</h5>
+                                <div class="card-tools">
+                                    @if (User.IsInRole("Developer") && User.FindFirstValue(ClaimTypes.NameIdentifier) == task.ExecutorId)
+                                    {
+                                        <form asp-controller="Task" asp-action="Finish" asp-route-id="@task.Id" method="post">
+                                            <button type="submit" class="btn btn-tool">
+                                                <i class="fa-solid fa-circle-check"></i>
+                                            </button>
+                                        </form>
+                                    }
+
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <p>
+                                    @task.Description
+                                </p>
+                                <p>
+                                    Creator: @task.Creator.UserName
+                                </p>
+                                <p>
+                                    Executor: @task.Executor.UserName
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="card card-row card-success" style="min-width: 400px" id="testing">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        Testing
+                    </h3>
+                </div>
+                @foreach (var task in Model.Where(t => t.Status == Kanban.Models.Task.Statuses.Finished))
+                {
+                    <div class="card-body" style="height: auto">
+                        <div class="card card-light card-outline">
+                            <div class="card-header">
+                                <h5 class="card-title"> <b>@task.Title</b> from @task.CreatedDate.Day/@task.CreatedDate.Month/@task.CreatedDate.Year until @task.ExpectedEndDate.Day/@task.ExpectedEndDate.Month/@task.ExpectedEndDate.Year</h5>
+                                <div class="card-tools">
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                        <form style="display: inline" asp-controller="Task" asp-action="Return" asp-route-id="@task.Id" method="post">
+                                            <button type="submit" class="btn btn-tool">
+                                                <i class="fa-solid fa-rotate-left"></i>
+                                            </button>
+                                        </form>
+                                        <form style="display: inline" asp-controller="Task" asp-action="Delete" asp-route-id="@task.Id" method="post">
+                                            <button type="submit" class="btn btn-tool">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    }
+
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <p>
+                                    @task.Description
+                                </p>
+                                <p>
+                                    Creator: @task.Creator.UserName
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+</div>
+<!-- End Main Content-->
+<!-- Start Footer -->
+<footer>
+</footer>
+<!-- End Footer -->
+<!-- Start Script -->
+<script src="~/js/min.js"></script>
+<script>
+    function todoChecker(e){
+        let checker = e.target
+        let todo = document.getElementById("todo")
+
+        if(checker.checked){
+            todo.style.display = "initial"
+        }else{
+            todo.style.display = "none"
+        }
+    }
+
+    function inChecker(e){
+        let checker = e.target
+        let todo = document.getElementById("inprogress")
+        if(checker.checked){
+            todo.style.display = "initial"
+        }else{
+            todo.style.display = "none"
+        }
+    }
+
+    function testingChecker(e) {
+        let checker = e.target
+        let todo = document.getElementById("testing")
+        if (checker.checked) {
+            todo.style.display = "initial"
+        } else {
+            todo.style.display = "none"
+        }
+    }
+</script>

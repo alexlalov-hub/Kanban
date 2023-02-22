@@ -1,0 +1,64 @@
+﻿@using Kanban.Models
+@model IEnumerable<UserListViewModel>
+
+@{
+    ViewData["Title"] = "Users";
+}
+
+<title>@ViewBag.Title</title>
+
+<div class="col-5" style="position: fixed;left: 35%;margin-left: -50px;margin-top: 40px">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Application Users</h3>
+            <div class="card-tools">
+                <div class="input-group input-group-sm" style="width: 150px;">
+                    <form asp-area="Admin" asp-controller="Administration" asp-action="AllUsers" style="display: inline">
+                        <input type="text" name="searchedName" class="form-control float-right" placeholder="Search" style="margin-left: 50px">
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-default">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body table-responsive p-0">
+            <table class="table table-hover text-nowrap">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model)
+                    {
+                        <tr>
+                            <td>@user.Name</td>
+                            <td>@user.Email</td>
+                            <td>
+                                <a asp-area="Admin" asp-action="Edit" asp-controller="Administration" asp-route-id="@user.Id" class="btn btn-app bg-warning">
+                                    <i class="fas fa-edit"></i> Edit
+                                </a>
+                                @if (user.Role.First() == "Developer")
+                                {
+                                    <a asp-area="Admin" asp-action="MakeAdmin" asp-controller="Administration" asp-route-id="@user.Id" class="btn btn-app bg-warning"><i class="fas fa-edit"></i>Make Admin</a>
+                                    <a asp-area="Admin" asp-action="MakeClient" asp-controller="Administration" asp-route-id="@user.Id" class="btn btn-app bg-warning"><i class="fas fa-edit"></i>Make Client</a>
+                                }
+                                @if (user.Role.First() == "Client")
+                                {
+                                    <a asp-area="Admin" asp-action="MakeAdmin" asp-controller="Administration" asp-route-id="@user.Id" class="btn btn-app bg-warning"><i class="fas fa-edit"></i>Make Admin</a>
+                                    <a asp-area="Admin" asp-action="MakeDeveloper" asp-controller="Administration" asp-route-id="@user.Id" class="btn btn-app bg-warning"><i class="fas fa-edit"></i>Make Developer</a>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
