@@ -58,7 +58,7 @@ namespace Kanban.Areas.Admin.Controllers
                 || user.Email.Contains(searchedName));
             }
 
-            return View(await users
+            return View(users
                 .Select(u => new UserListViewModel()
                 {
                     Id = u.Id,
@@ -66,8 +66,7 @@ namespace Kanban.Areas.Admin.Controllers
                     Email = u.Email,
                     Role = userManager.GetRolesAsync(u).Result
                 })
-                .AsNoTracking()
-                .ToListAsync());
+                .ToList());
         }
 
 
