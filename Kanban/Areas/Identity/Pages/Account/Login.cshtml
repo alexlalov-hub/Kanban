@@ -22,12 +22,12 @@
         </div>
         <div class="card">
             <div class="card-body login-card-body">
-                <p class="login-box-msg">Sign in to start your session</p>
+                <p class="login-box-msg">Влез, за да започнеш работа</p>
 
                 <form id="account" asp-asp-route-returnUrl="@Model.ReturnUrl" method="post">
                     <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
                     <div class="input-group mb-3">
-                        <input asp-for="Input.Username" autocomplete="username" type="text" class="form-control" placeholder="Username">
+                        <input asp-for="Input.Username" autocomplete="username" type="text" class="form-control" placeholder="Потребителско име">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
@@ -37,7 +37,7 @@
                     </div>
                     <span asp-validation-for="Input.Username" class="text-danger mb-xl-5"></span>
                     <div class="input-group mb-3">
-                        <input asp-for="Input.Password" type="password" class="form-control" placeholder="Password">
+                        <input asp-for="Input.Password" type="password" class="form-control" placeholder="Парола">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
@@ -51,33 +51,23 @@
                             <div class="icheck-primary">
                                 <input asp-for="Input.RememberMe" type="checkbox" id="remember">
                                 <label for="remember">
-                                    Remember Me
+                                    Запомни ме
                                 </label>
                             </div>
                         </div>
                         <!-- /.col -->
                         <div class="col-4">
-                            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                            <button type="submit" class="btn btn-primary btn-block">Влез</button>
                         </div>
                         <!-- /.col -->
                     </div>
                 </form>
 
-                <div class="social-auth-links text-center mb-3">
-                    <p>- OR -</p>
-                    <a href="#" class="btn btn-block btn-primary">
-                        <i class="fab fa-facebook mr-2"></i> Sign in using Facebook
-                    </a>
-                    <a href="#" class="btn btn-block btn-danger">
-                        <i class="fab fa-google-plus mr-2"></i> Sign in using Google+
-                    </a>
-                </div>
-
                 <p class="mb-1">
-                    <a asp-page="ForgotPassword" asp-route-returnUrl="@Model.ReturnUrl">I forgot my password</a>
+                    <a asp-page="ForgotPassword" asp-route-returnUrl="@Model.ReturnUrl">Забравена парола</a>
                 </p>
                 <p class="mb-0">
-                    <a asp-page="Register" asp-route-returnUrl="@Model.ReturnUrl" class="text-center">Register a new membership</a>
+                    <a asp-page="Register" asp-route-returnUrl="@Model.ReturnUrl" class="text-center">Регистрирай се</a>
                 </p>
             </div>
         </div>

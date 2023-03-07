@@ -26,26 +26,6 @@ namespace Kanban.Areas.Admin.Controllers
             return View();
         }
 
-        //Create all roles
-        //public async Task<IActionResult> CreateRole()
-        //{
-        //    await roleManager.CreateAsync(new IdentityRole()
-        //    {
-        //        Name = "Admin"
-        //    });
-
-        //    await roleManager.CreateAsync(new IdentityRole()
-        //    {
-        //        Name = "Developer"
-        //    }); 
-
-        //    await roleManager.CreateAsync(new IdentityRole()
-        //    {
-        //        Name = "Client"
-        //    });
-
-        //    return Ok();
-        //}
         public async Task<IActionResult> AllUsers(string searchedName)
         {
             IQueryable<User> users = from u in context.Users select u;

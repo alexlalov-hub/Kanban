@@ -22,11 +22,11 @@
 
         <div class="card">
             <div class="card-body register-card-body">
-                <p class="login-box-msg">Register a new membership</p>
+                <p class="login-box-msg">Регистрирай се!</p>
 
                 <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
                     <div class="input-group mb-3">
-                        <input asp-for="Input.CustomUsername" type="text" class="form-control" placeholder="Username">
+                        <input asp-for="Input.CustomUsername" type="text" class="form-control" placeholder="Потребителско име">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>
@@ -34,7 +34,7 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input asp-for="Input.FirstName" type="text" class="form-control" placeholder="First name">
+                        <input asp-for="Input.FirstName" type="text" class="form-control" placeholder="Име">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>
@@ -42,7 +42,7 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input asp-for="Input.LastName" type="text" class="form-control" placeholder="Last name">
+                        <input asp-for="Input.LastName" type="text" class="form-control" placeholder="Фамилия">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>
@@ -50,7 +50,7 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input asp-for="Input.Email" type="email" class="form-control" placeholder="Email">
+                        <input asp-for="Input.Email" type="email" class="form-control" placeholder="Имейл">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
@@ -58,7 +58,7 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input asp-for="Input.Password" type="password" class="form-control" placeholder="Password">
+                        <input asp-for="Input.Password" type="password" class="form-control" placeholder="Парола">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
@@ -66,31 +66,19 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input asp-for="Input.ConfirmPassword" type="password" class="form-control" placeholder="Retype password">
+                        <input asp-for="Input.ConfirmPassword" type="password" class="form-control" placeholder="Повтори паролата">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
                             </div>
                         </div>
                     </div>
-                    <div class="col-4" style="margin-left: 107px">
-                        <button type="submit" class="btn btn-primary btn-block">Register</button>
+                    <div>
+                        <button type="submit" class="btn btn-primary btn-block" style="margin: 0 auto">Регистрирай се</button>
                     </div>
                 </form>
 
-                <div class="social-auth-links text-center">
-                    <p>- OR -</p>
-                    <a href="#" class="btn btn-block btn-primary">
-                        <i class="fab fa-facebook mr-2"></i>
-                        Sign up using Facebook
-                    </a>
-                    <a href="#" class="btn btn-block btn-danger">
-                        <i class="fab fa-google-plus mr-2"></i>
-                        Sign up using Google+
-                    </a>
-                </div>
-
-                <a asp-page ="Login" asp-route-returnUrl="@Model.ReturnUrl" class="text-center">I already have a membership</a>
+                <a asp-page ="Login" asp-route-returnUrl="@Model.ReturnUrl" class="text-center">Вече имам акаунт</a>
             </div>
         </div>
     </div>
