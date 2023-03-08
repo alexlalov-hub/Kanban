@@ -49,6 +49,27 @@ namespace Kanban.Areas.Admin.Controllers
                 .ToList());
         }
 
+        [HttpGet]
+        public async Task<IActionResult> CreateRole()
+        {
+            await roleManager.CreateAsync(new IdentityRole()
+            {
+                Name = "Admin"
+            });
+
+            await roleManager.CreateAsync(new IdentityRole()
+            {
+                Name = "Developer"
+            });
+
+            await roleManager.CreateAsync(new IdentityRole()
+            {
+                Name = "Client"
+            });
+
+            return Ok();
+        }
+
 
         public async Task<IActionResult> Edit(string? id)
         {
@@ -65,34 +86,6 @@ namespace Kanban.Areas.Admin.Controllers
             }
 
             return View(user);
-        }
-
-        public async Task<IActionResult> MakeAdmin(string id)
-        {
-            if (id == null || context.Users == null)
-            {
-                return NotFound();
-            }
-
-            var user = context.Users.Where(u => u.Id == id).FirstOrDefault();
-
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-            try
-            {
-                var currentRole = userManager.GetRolesAsync(user).Result.First();
-                await userManager.RemoveFromRoleAsync(user, currentRole);
-                await userManager.AddToRoleAsync(user, "Admin");
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-
-            return RedirectToAction("AllUsers");
         }
 
         public async Task<IActionResult> MakeDeveloper(string id)

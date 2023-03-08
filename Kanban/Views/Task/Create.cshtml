@@ -6,16 +6,16 @@
 
 <div class="login-box" style="margin: auto; margin-top: 100px">
     <div class="login-logo">
-        <a asp-area="" asp-controller="Task" asp-action="Index">Create a <b>Task</b></a>
+        <a asp-area="" asp-controller="Task" asp-action="Index">Създай <b>Задача</b></a>
     </div>
     <div class="card">
         <div class="card-body login-card-body">
-            <p class="login-box-msg">Enter a title, description and an end date</p>
+            <p class="login-box-msg">Въведи наименование, описание и крайна дата</p>
 
             <form asp-action="Create" method="post">
                 <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
                 <div class="input-group mb-3">
-                    <input asp-for="Title" autocomplete="title" type="text" class="form-control" placeholder="Title">
+                    <input asp-for="Title" autocomplete="title" type="text" class="form-control" placeholder="Наименование">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <i class="fa-solid fa-quote-left"></i>
@@ -25,7 +25,7 @@
                 </div>
                 <span asp-validation-for="Title" class="text-danger mb-xl-5"></span>
                 <div class="input-group mb-3">
-                    <input asp-for="Description" type="text" class="form-control" placeholder="Description">
+                    <input asp-for="Description" type="text" class="form-control" placeholder="Описание">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <i class="fa-solid fa-file-lines"></i>
@@ -34,19 +34,12 @@
                 </div>
                 <span asp-validation-for="Description" class="text-danger"></span>
 
-                <div class="input-group mb-3">
-                    <input asp-for="ExpectedEndDate" type="date" class="form-control" placeholder="End Date">
-                    <div class="input-group-append">
-                        <div class="input-group-text">
-                            <i class="fa-solid fa-calendar-days"></i>
-                        </div>
-                    </div>
-                </div>
+                <input asp-for="ExpectedEndDate" type="date" class="form-control" placeholder="Крайна Дата">
                 <span asp-validation-for="ExpectedEndDate" class="text-danger"></span>
 
                 <div class="row">
-                    <div class="col-4">
-                        <button type="submit" class="btn btn-primary btn-block" style="margin-left: 110px">Create</button>
+                    <div class="col-4 mt-3">
+                        <button type="submit" class="btn btn-primary btn-block" style="margin-left: 110px">Добави</button>
                     </div>
                 </div>
             </form>
@@ -109,5 +102,7 @@
 </div>*@
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
