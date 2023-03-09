@@ -49,26 +49,26 @@ namespace Kanban.Areas.Admin.Controllers
                 .ToList());
         }
 
-        [HttpGet]
-        public async Task<IActionResult> CreateRole()
-        {
-            await roleManager.CreateAsync(new IdentityRole()
-            {
-                Name = "Admin"
-            });
+        //[HttpGet]
+        //public async Task<IActionResult> CreateRole()
+        //{
+        //    await roleManager.CreateAsync(new IdentityRole()
+        //    {
+        //        Name = "Admin"
+        //    });
 
-            await roleManager.CreateAsync(new IdentityRole()
-            {
-                Name = "Developer"
-            });
+        //    await roleManager.CreateAsync(new IdentityRole()
+        //    {
+        //        Name = "Developer"
+        //    });
 
-            await roleManager.CreateAsync(new IdentityRole()
-            {
-                Name = "Client"
-            });
+        //    await roleManager.CreateAsync(new IdentityRole()
+        //    {
+        //        Name = "Client"
+        //    });
 
-            return Ok();
-        }
+        //    return Ok();
+        //}
 
 
         public async Task<IActionResult> Edit(string? id)
