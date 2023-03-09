@@ -29,21 +29,17 @@ namespace Kanban.Controllers
             return View();
         }
 
-        // GET: CommentController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
 
         // POST: CommentController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(int id, Comment comment)
+        public async Task<IActionResult> Create([FromQuery] int id, [FromForm] Comment comment)
         {
             try
             {
                 comment.UserId = _userManager.GetUserId(User);
                 comment.TaskId = id;
+                comment.DatePosted = DateTime.Now;
                 _context.Add(comment);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index", "Task");

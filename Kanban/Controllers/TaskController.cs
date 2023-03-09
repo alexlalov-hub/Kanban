@@ -38,8 +38,7 @@ namespace Kanban.Controllers
                 return NotFound();
             }
 
-            var task = await _context.Tasks
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var task = await _context.Tasks.Include(c => c.Creator).Include(e => e.Executor).Include(c => c.Comments).FirstOrDefaultAsync(m => m.Id == id);
             if (task == null)
             {
                 return NotFound();

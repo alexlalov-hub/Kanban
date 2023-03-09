@@ -22,5 +22,7 @@ namespace Kanban.Models
         public string? CommentText { get; set; }
 
         public User? User { get; set; }
+
+        public DateTime DatePosted { get; set; }
     }
 }

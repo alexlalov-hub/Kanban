@@ -32,8 +32,8 @@
                 {
                     <div class="card-body" style="height: auto">
                         <div class="card card-light card-outline">
-                            <div class="card-header">
-                                <h5 class="card-title"><a asp-controller="Task" asp-action="Details" asp-route-id="@task.Id">@task.Title</a> от @task.CreatedDate.Day/@task.CreatedDate.Month/@task.CreatedDate.Year до @task.ExpectedEndDate.Day/@task.ExpectedEndDate.Month/@task.ExpectedEndDate.Year</h5>
+                            <div class="card-header d-flex">
+                                <h5 class="card-title text-wrap"><a asp-controller="Task" asp-action="Details" asp-route-id="@task.Id">@task.Title</a> от @task.CreatedDate.Day/@task.CreatedDate.Month/@task.CreatedDate.Year до @task.ExpectedEndDate.Day/@task.ExpectedEndDate.Month/@task.ExpectedEndDate.Year</h5>
                                 <div class="card-tools">
                                     @if (User.IsInRole("Developer"))
                                     {
@@ -69,13 +69,13 @@
                 {
                     <div class="card-body" style="height: auto">
                         <div class="card card-light card-outline">
-                            <div class="card-header">
+                            <div class="card-header d-flex">
                                 <h5 class="card-title"><a asp-controller="Task" asp-action="Details" asp-route-id="@task.Id">@task.Title</a> от @task.CreatedDate.Day/@task.CreatedDate.Month/@task.CreatedDate.Year до @task.ExpectedEndDate.Day/@task.ExpectedEndDate.Month/@task.ExpectedEndDate.Year</h5>
-                                <div class="card-tools">
+                                <div class="card-tools" style="align-self: stretch">
                                     @if (User.IsInRole("Developer") && User.FindFirstValue(ClaimTypes.NameIdentifier) == task.ExecutorId)
                                     {
                                         <form asp-controller="Task" asp-action="Finish" asp-route-id="@task.Id" method="post">
-                                            <button type="submit" class="btn btn-tool">
+                                            <button type="submit" class="btn btn-tool" >
                                                 <i class="fa-solid fa-circle-check"></i>
                                             </button>
                                         </form>
@@ -108,7 +108,7 @@
                 {
                     <div class="card-body" style="height: auto">
                         <div class="card card-light card-outline">
-                            <div class="card-header">
+                            <div class="card-header d-flex">
                                 <h5 class="card-title"><a asp-controller="Task" asp-action="Details" asp-route-id="@task.Id">@task.Title</a> от @task.CreatedDate.Day/@task.CreatedDate.Month/@task.CreatedDate.Year до @task.ExpectedEndDate.Day/@task.ExpectedEndDate.Month/@task.ExpectedEndDate.Year</h5>
                                 <div class="card-tools">
                                     @if (User.IsInRole("Admin"))
