@@ -9,5 +9,7 @@ namespace Kanban.Models
         public string LastName { get; set; }
 
         public IEnumerable<Task> Tasks { get; set; } = new List<Task>();
+
+        public ICollection<Comment> Comments { get; set; }
     }
 }
