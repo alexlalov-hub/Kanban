@@ -33,16 +33,16 @@ namespace Kanban.Controllers
         // POST: CommentController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([FromQuery] int id, [FromForm] Comment comment)
+        public async Task<IActionResult> Create([FromForm] int id, [FromForm] string textarea, [FromForm] Comment comment)
         {
             try
             {
                 comment.UserId = _userManager.GetUserId(User);
-                comment.TaskId = id;
                 comment.DatePosted = DateTime.Now;
+                comment.CommentText = textarea;
                 _context.Add(comment);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Index", "Task");
+                return RedirectToAction("Details", "Task", new { id = comment.TaskId});
             }
             catch
             {

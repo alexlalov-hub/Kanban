@@ -4,6 +4,60 @@
     ViewData["Title"] = "Details";
 }
 
+<section class="content">
+
+    <div class="card mt-5 w-50" style="left: 25%">
+        <div class="card-body align-items-center">
+            <h3 class="text-primary"><i class="fas fa-paint-brush"></i>@Model.Title</h3>
+            <p class="text-muted">@Model.Description</p>
+            <br>
+            <div class="text-muted">
+                <p class="text-sm">
+                    Възложител
+                    <b class="d-block">@Model.Creator</b>
+                </p>
+
+                @if (Model.Executor != null)
+                {
+                    <p class="text-sm">
+                        Изпълнител
+                        <b class="d-block">@Model.Executor</b>
+                    </p>
+                }
+
+
+            </div>
+            <h5 class="mt-5 text-muted mb-3 font-weight-bold">Коментари</h5>
+            <div class="col-12">
+                @foreach (var comment in Model.Comments)
+                {
+                    <div class="post clearfix">
+                        <div class="user-block">
+                            <span class="username" style="margin-left: 0">
+                                @comment.User.FirstName @comment.User.LastName
+                            </span>
+                            <span class="description" style="margin-left: 0">@comment.DatePosted.DayOfWeek @comment.DatePosted.Day of @comment.DatePosted.Date.ToString("MMM") @comment.DatePosted.Year</span>
+                        </div>
+
+                        <p>
+                            @comment.CommentText
+                        </p>
+                    </div>
+                }
+
+            </div>
+
+            <form asp-area="" asp-controller="Comment" asp-action="Create" method="post" style="display: flex; flex-direction: column">
+                <input type="hidden" value="@Model.Id" name="taskId" />
+                <textarea name="textarea" style="margin: auto; width: 500px" class="mb-3"></textarea>
+                <input type="submit" class="btn btn-primary" value="Добави коментар" style="width: 25%; margin: 0 auto" />
+            </form>
+        </div>
+
+    </div>
+
+</section>
+
 @*<h1>Details</h1>
 
 <div>
@@ -58,56 +112,3 @@
     <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>*@
-
-<section class="content">
-
-    <div class="card mt-5 w-50" style="left: 25%">
-        <div class="card-body align-items-center">
-            <h3 class="text-primary"><i class="fas fa-paint-brush"></i>@Model.Title</h3>
-            <p class="text-muted">@Model.Description</p>
-            <br>
-            <div class="text-muted">
-                <p class="text-sm">
-                    Възложител
-                    <b class="d-block">@Model.Creator</b>
-                </p>
-
-                @if (Model.Executor != null)
-                {
-                    <p class="text-sm">
-                        Изпълнител
-                        <b class="d-block">@Model.Executor</b>
-                    </p>
-                }
-
-
-            </div>
-            <h5 class="mt-5 text-muted mb-3 font-weight-bold">Коментари</h5>
-            <div class="col-12">
-                @foreach (var comment in Model.Comments)
-                {
-                    <div class="post clearfix">
-                        <div class="user-block">
-                            <span class="username" style="margin-left: 0">
-                                @comment.User.FirstName @comment.User.LastName
-                            </span>
-                            <span class="description" style="margin-left: 0">@comment.DatePosted.DayOfWeek @comment.DatePosted.Day of @comment.DatePosted.Month @comment.DatePosted.Year</span>
-                        </div>
-
-                        <p>
-                            @comment.CommentText
-                        </p>
-                    </div>
-                }
-
-            </div>
-
-            <form asp-area="" asp-controller="Comment" asp-action="Create" method="post" style="display: flex; flex-direction: column" >
-                <textarea asp-for="" style="margin: auto; width: 500px" class="mb-3"></textarea>
-                <input type="submit" class="btn btn-primary" value="Добави коментар" style="width: 25%; margin: 0 auto"/>
-            </form>
-        </div>
-
-    </div>
-
-</section>
