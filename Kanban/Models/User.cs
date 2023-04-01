@@ -10,6 +10,6 @@ namespace Kanban.Models
 
         public IEnumerable<Task> Tasks { get; set; } = new List<Task>();
 
-        public ICollection<Comment> Comments { get; set; }
+        public ICollection<Comment>? Comments { get; set; }
     }
 }

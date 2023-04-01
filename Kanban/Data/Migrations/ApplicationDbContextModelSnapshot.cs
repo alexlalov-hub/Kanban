@@ -50,7 +50,7 @@ namespace Kanban.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Comments");
+                    b.ToTable("Comments", (string)null);
                 });
 
             modelBuilder.Entity("Kanban.Models.Task", b =>
@@ -98,7 +98,7 @@ namespace Kanban.Data.Migrations
 
                     b.HasIndex("ExecutorId");
 
-                    b.ToTable("Tasks");
+                    b.ToTable("Tasks", (string)null);
                 });
 
             modelBuilder.Entity("Kanban.Models.User", b =>

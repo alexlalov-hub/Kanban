@@ -84,7 +84,7 @@ namespace Kanban.Data
             PasswordHasher<User> hasher = new();
             users[0].PasswordHash = hasher.HashPassword(users[0], "Admin1!");
             users[1].PasswordHash = hasher.HashPassword(users[1], "Client1!");
-            users[1].PasswordHash = hasher.HashPassword(users[2], "Developer1!");
+            users[2].PasswordHash = hasher.HashPassword(users[2], "Developer1!");
 
             //UserRoles
             IdentityUserRole<string>[] userRoles = new IdentityUserRole<string>[]
