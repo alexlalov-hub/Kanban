@@ -8,7 +8,7 @@
 
     <div class="card mt-5 w-50" style="left: 25%">
         <div class="card-body align-items-center">
-            <h3 class="text-primary"><i class="fas fa-paint-brush"></i>@Model.Title</h3>
+            <h3 class="text-primary">@Model.Title</h3>
             <div class="text-muted">
                 <p class="text-sm">
                     Изпълнител
@@ -38,7 +38,7 @@
                 {
                     <div class="post clearfix">
                         <div class="user-block">
-                            <span class="username" style="margin-left: 0">
+                            <span class="username text-primary" style="margin-left: 0">
                                 @comment.User.FirstName @comment.User.LastName
                             </span>
                             <span class="description" style="margin-left: 0">@comment.DatePosted.DayOfWeek @comment.DatePosted.Day of @comment.DatePosted.Date.ToString("MMM") @comment.DatePosted.Year</span>
