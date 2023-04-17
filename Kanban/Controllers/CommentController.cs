@@ -1,11 +1,12 @@
 ﻿using Kanban.Data;
 using Kanban.Models;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Kanban.Controllers
 {
+    [Authorize]
     public class CommentController : Controller
     {
         private readonly ApplicationDbContext _context;

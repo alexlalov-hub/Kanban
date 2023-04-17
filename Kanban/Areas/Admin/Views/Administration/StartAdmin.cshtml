@@ -1,0 +1,27 @@
+﻿@model Kanban.Models.Task;
+
+@{
+}
+
+<div class="login-box" style="margin-left: 45%; margin-top: 10%">
+    <div class="login-logo">
+        <a asp-area="" asp-controller="Task" asp-action="Index"><b>Kan</b>ban</a>
+    </div>
+    <div class="card">
+        <div class="card-body login-card-body" style="">
+            <p class="login-box-msg">Задай на разработчик</p>
+
+            <form asp-area="Admin" asp-controller="Administration" asp-action="StartAdmin" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                <div class="input-group mb-3">
+                    <select asp-for="ExecutorId" autocomplete="username" type="text" asp-items="@ViewBag.Users" class="form-control" style="border-right: 1px solid #ced4da" placeholder="First Name">
+
+                    </select>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-primary m-auto">Задай</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

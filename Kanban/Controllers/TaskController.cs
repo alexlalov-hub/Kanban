@@ -24,13 +24,14 @@ namespace Kanban.Controllers
             _userManager = userManager;
         }
 
-        // GET: Task
         public async Task<IActionResult> Index()
         {
-            return _context.Tasks != null ? View(await _context.Tasks.Include(c => c.Creator).Include(e => e.Executor).ToListAsync()) : Problem("Entity set 'ApplicationDbContext.Tasks'  is null.");
+            return _context.Tasks != null ? 
+                View(await _context.Tasks.Include(c => c.Creator)
+                .Include(e => e.Executor).ToListAsync()) 
+                : Problem("Entity set 'ApplicationDbContext.Tasks'  is null.");
         }
 
-        // GET: Task/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Tasks == null)
@@ -38,33 +39,34 @@ namespace Kanban.Controllers
                 return NotFound();
             }
 
-            var task = await _context.Tasks.Include(c => c.Creator).Include(e => e.Executor).FirstOrDefaultAsync(m => m.Id == id);
+            var task = await _context.Tasks.Include(c => c.Creator)
+                .Include(e => e.Executor)
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (task == null)
             {
                 return NotFound();
             }
 
-            var taskComments = await _context.Comments.Where(c => c.TaskId == task.Id).Include(u => u.User).ToListAsync();
+            var taskComments = await _context.Comments
+                .Where(c => c.TaskId == task.Id)
+                .Include(u => u.User).ToListAsync();
             task.Comments = taskComments;
             return View(task);
         }
 
-        // GET: Task/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Task/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,CreatorId,ExecutorId,CreatedDate,BeginDate,ExpectedEndDate,Description")] Models.Task task)
+        public async Task<IActionResult> Create(Models.Task task)
         {
             if (task.ExpectedEndDate <= DateTime.Now)
             {
-                ModelState.AddModelError("ExpectedEndDate", "End date must not be before today");
+                ModelState.AddModelError("ExpectedEndDate", 
+                    "End date must not be before today");
             }
 
             if (ModelState.IsValid)
@@ -78,22 +80,6 @@ namespace Kanban.Controllers
 
             return View(task);
         }
-
-        //// GET: Task/Edit/5
-        //public async Task<IActionResult> Edit(int? id)
-        //{
-        //    if (id == null || _context.Tasks == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var task = await _context.Tasks.FindAsync(id);
-        //    if (task == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return View(task);
-        //}
 
         [Authorize(Roles = "Developer")]
         [HttpPost]
@@ -134,6 +120,7 @@ namespace Kanban.Controllers
             }
             return RedirectToAction(nameof(Index));
         }
+
 
         [Authorize(Roles = "Developer")]
         [HttpPost]
