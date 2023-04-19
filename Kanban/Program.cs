@@ -1,4 +1,4 @@
-using Kanban.Data;
+﻿using Kanban.Data;
 using Kanban.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -16,6 +16,11 @@ builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfi
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 
+builder.Services.Configure<RequestLocalizationOptions>(options =>
+{
+    options.SetDefaultCulture("bg");
+    options.AddSupportedUICultures("bg");
+ });
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

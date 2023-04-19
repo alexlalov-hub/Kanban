@@ -51,35 +51,35 @@ namespace Kanban.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage = "{0} е задължително")]
             [StringLength(20, ErrorMessage = "The {0} must be at max {1} characters long.")]
-            [Display(Name = "CustomUsername")]
+            [Display(Name = "Потребителското име")]
             public string CustomUsername { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "{0} е задължително")]
             [StringLength(20, ErrorMessage = "The {0} must be and at max {1} characters long.")]
-            [Display(Name = "First Name")]
+            [Display(Name = "Името")]
             public string FirstName { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "{0} е задължителна")]
             [StringLength(20, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.")]
-            [Display(Name = "Last Name")]
+            [Display(Name = "Фамилията")]
             public string LastName { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "{0} е задължителен")]
             [EmailAddress]
-            [Display(Name = "Email")]
+            [Display(Name = "Имейлът")]
             public string Email { get; set; }
 
-            [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [Required(ErrorMessage = "{0} е задължителна")]
+            [StringLength(100, ErrorMessage = "Паролата трябва да бъде поне {2} а най-много {1} знака.", MinimumLength = 6)]
             [DataType(DataType.Password)]
-            [Display(Name = "Password")]
+            [Display(Name = "Паролата")]
             public string Password { get; set; }
 
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Display(Name = "Повтори паролата")]
+            [Compare("Password", ErrorMessage = "Паролите не съвпадат.")]
             public string ConfirmPassword { get; set; }
         }
 

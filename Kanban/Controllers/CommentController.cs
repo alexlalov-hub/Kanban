@@ -47,7 +47,7 @@ namespace Kanban.Controllers
             }
             catch
             {
-                return View();
+                return RedirectToAction("Details", "Task", new { id = comment.TaskId });
             }
         }
 

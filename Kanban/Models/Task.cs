@@ -17,7 +17,8 @@ namespace Kanban.Models
         [Key]
         public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "{0} е задължително")]
+        [Display(Name = "Заглавието")]
         [StringLength(100)]
         public string? Title { get; set; }
 
@@ -36,16 +37,18 @@ namespace Kanban.Models
         [Column(TypeName = "date")]
         public DateTime BeginDate { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "{0} е задължителна")]
+        [Display(Name = "Крайната дата")]
         [Column(TypeName = "date")]
         public DateTime ExpectedEndDate { get; set; }
 
         [Column(TypeName = "date")]
         public DateTime ActualEndDate { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "{0} е задължително")]
+        [Display(Name = "Описанието")]
         [StringLength(255)]
-        public string? Description { get; set; }
+        public string Description { get; set; }
 
         [Required]
         public Statuses Status { get; set; }

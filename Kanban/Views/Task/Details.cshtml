@@ -1,4 +1,5 @@
-﻿@model Kanban.Models.Task
+﻿@using System.Globalization;
+@model Kanban.Models.Task
 
 @{
     ViewData["Title"] = "Details";
@@ -11,7 +12,7 @@
             <h3 class="text-primary">@Model.Title</h3>
             <div class="text-muted">
                 <p class="text-sm">
-                    Изпълнител
+                    Описание
                     <b class="d-block">@Model.Description</b>
                 </p>
             </div>
@@ -36,12 +37,13 @@
             <div class="col-12">
                 @foreach (var comment in Model.Comments)
                 {
+                    CultureInfo bg = new CultureInfo("bg");
                     <div class="post clearfix">
                         <div class="user-block">
                             <span class="username text-primary" style="margin-left: 0">
                                 @comment.User.FirstName @comment.User.LastName
                             </span>
-                            <span class="description" style="margin-left: 0">@comment.DatePosted.DayOfWeek @comment.DatePosted.Day of @comment.DatePosted.Date.ToString("MMM") @comment.DatePosted.Year</span>
+                            <span class="description" style="margin-left: 0">@comment.DatePosted.ToString("D", bg)</span>
                         </div>
 
                         <p>
@@ -63,58 +65,3 @@
     </div>
 
 </section>
-
-@*<h1>Details</h1>
-
-<div>
-    <h4>Task</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CreatorId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CreatorId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ExecutorId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ExecutorId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CreatedDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CreatedDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BeginDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BeginDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ExpectedEndDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ExpectedEndDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>*@
