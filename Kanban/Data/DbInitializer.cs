@@ -1,6 +1,7 @@
 ﻿
 using Kanban.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace Kanban.Data
 {
@@ -8,7 +9,7 @@ namespace Kanban.Data
     {
         public static void Initialize(ApplicationDbContext context)
         {
-            //context.Database.EnsureCreated();
+            context.Database.Migrate();
 
             if (context.Users.Any() || context.Tasks.Any() || context.Comments.Any())
             {
